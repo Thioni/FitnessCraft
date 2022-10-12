@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+      {% if app.request.get("_route") == "create_franchisee" %}
+        <section class="row m-0 justify-content-center">
+          <div class="col-sm-3 col-lg-3 col-xl-3 text-center">
+            <h3>Créer une franchisé</h3>
+          </div>
+        </section>
+      {% else %}
+        <section class="row m-0 justify-content-center">
+          <div class="col-sm-3 col-lg-3 col-xl-2 text-center">
+            <h3>Modifier le franchisé {{ franchisee.name }}</h3>
+          </div>
+        </section>
+      {% endif %}
+
+      {{ form_start(franchiseeForm) }}
+        <section class="row m-0 justify-content-center">
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(franchiseeForm.name) }}
+          </div>
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(franchiseeForm.email) }}
+          </div>
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(franchiseeForm.active) }}
+          </div>
+        </section>
+
+        {% if app.request.get("_route") == "create_franchisee" %}
+          <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('franchisee_list') }}" class="btn btn-warning">Annuler</a>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="créer" class="btn btn-success mt-3">
+            </div>
+          </section>
+        {% else %}
+          <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('franchisee_list') }}" class="btn btn-success">Annuler</a>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="modifier" class="btn btn-warning mt-3">
+            </div>
+          </section>
+        {% endif %}
+      {{ form_end(franchiseeForm) }}
+
+{% endblock %}

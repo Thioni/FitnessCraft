@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+  <div class="container-fluid">
+
+    <h1 class="text-center">Liste des Structures</h1>
+      <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for structure in structures %}
+            <div {% if structure.active == 1 %} addClass="active" {% endif %} class="card m-1 bg-success" style="width: 25rem;">
+              <div class="card-body">
+                <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
+                  <div class="row">
+                    <div class="col-6 card-text fw-bold">EMAIL:</div>
+                    <div class="col-6 card-text">{{ structure.manageremail }}</div>
+                  </div>
+              </div>
+
+              <div class="row justify-content-around">
+                <a href="/structure-details/{{ structure.id }}" class="col-3 btn btn-primary mb-2">Détails</a>
+              </div>
+            </div>
+        {% endfor %}
+      </section>
+
+      <div class="row justify-content-center">
+        <a href="/" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
+      </div>
+
+  </div>
+{% endblock %}

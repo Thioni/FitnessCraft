@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+  <div class="container-fluid">
+
+    <h1 class="text-center">Liste des Franchisés</h1>
+      <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for franchisee in franchisees %}
+            <div class="card m-1 bg-success" style="width: 25rem;">
+              <div class="card-body">
+                <h5 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h5>
+                  <div class="row">
+                    <div class="col-6 card-text fw-bold">EMAIL:</div>
+                    <div class="col-6 card-text">{{ franchisee.email }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 card-text fw-bold">ACTIVE:</div>
+                    <div class="col-6 card-text">{{ franchisee.active }}</div>
+                  </div>
+              </div>
+              <div class="row justify-content-around">
+              <a href="{{ path('update_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+              <a href="{{ path('franchisee_details', {'id': franchisee.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>
+              <a href="{{ path('delete_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
+              </div>
+            </div>
+        {% endfor %}
+      </section>
+
+      <div class="row justify-content-center">
+        <a href="/" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
+      </div>
+
+  </div>
+{% endblock %}

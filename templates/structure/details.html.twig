@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+  <div class="container-fluid">
+
+      <section class="d-flex flex-wrap justify-content-center my-5">
+               <div class="card m-1 bg-success" style="width: 40rem;">
+              <div class="card-body">
+                <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
+                  <div class="row">
+                    <div class="col-6 card-text text-dark fw-bold">EMAIL:</div>
+                    <div class="col-6 card-text">{{ structure.manageremail }}</div>
+                  </div>
+              </div>
+              <div class="row justify-content-around mt-2">
+                <a href="/update-structure/{{ structure.id }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+                <a href="/delete-structure/{{ structure.id }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
+              </div>
+            </div>
+      </section>
+
+      <section class="d-flex flex-wrap justify-content-center my-5">
+          <div class="card m-1 bg-info" style="width: 30rem;">
+            <div class="card-body">
+                {% for featuresLists in featuresList %}
+                {% if featuresLists.structure == structure.name %}             
+                <div class="row">
+                  <div class="col-8 card-text">Ajout de nouveaux membres:</div>
+                  <div class="col-4 card-text">{{ featuresLists.addnewmembers ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Envoi de newsletters:</div>
+                  <div class="col-4 card-text">{{ featuresLists.sendnewsletters ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Gestion des plannings:</div>
+                  <div class="col-4 card-text">{{ featuresLists.planningmanager ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Vente de boissons:</div>
+                  <div class="col-4 card-text">{{ featuresLists.selldrinks ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Vente d'équipements:</div>
+                  <div class="col-4 card-text">{{ featuresLists.sellequipment ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Abonnement premiums:</div>
+                  <div class="col-4 card-text">{{ featuresLists.premiumplans ? "Oui" : "Non" }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+          </div>
+      </section>
+      
+
+      <div class="row justify-content-center">
+        <a href="/structure-list" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
+      </div>
+
+  </div>
+{% endblock %}

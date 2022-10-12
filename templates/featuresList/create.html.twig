@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+      {% if app.request.get("_route") == "create_featuresList" %}
+        <section class="row m-0 justify-content-center">
+          <div class="col-sm-3 col-lg-3 col-xl-3 text-center">
+            <h3>Créer une liste de permissions</h3>
+          </div>
+        </section>
+      {% else %}
+        <section class="row m-0 justify-content-center">
+          <div class="col-sm-3 col-lg-3 col-xl-2 text-center">
+            <h3>Modifier la liste des permissions de {{ featuresList.structure }}</h3>
+          </div>
+        </section>
+      {% endif %}
+
+
+      {{ form_start(featuresListForm) }}
+        <section class="row m-0 justify-content-center">
+          <div class="mt-1 col-12 col-sm-8 col-lg-6 col-xxl-4 text-center">
+            {{ form_row(featuresListForm.structure) }}
+          </div>
+        </section>
+
+        <section class="row m-0 justify-content-center">
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.add_new_members) }}
+          </div>
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.send_newsletters) }}
+          </div>
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.planning_manager) }}
+          </div>
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.sell_drinks) }}
+          </div>
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.sell_equipment) }}
+          </div>
+          <div class="mt-1 col-sm-6 col-lg-4 col-xxl-2 text-center">
+            {{ form_row(featuresListForm.premium_plans) }}
+          </div>
+        </section>
+
+          <section class="row m-0 justify-content-center">
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="Valider" class="btn btn-warning mt-3">
+            </div>
+          </section>
+      {{ form_end(featuresListForm) }}
+
+
+
+{% endblock %}

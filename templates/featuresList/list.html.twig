@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+  <div class="container-fluid">
+
+    <h1 class="text-center">Liste des perms</h1>
+      <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for featuresList in featuresLists %}
+            <div class="card m-1 bg-info" style="width: 25rem;">
+              <div class="card-body">
+                <div class="row">
+                   <div class="col-12 text-center card-text mb-3">{{ featuresList.getstructure }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Ajout de nouveaux membres:</div>
+                  <div class="col-4 card-text">{{ featuresList.addnewmembers ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Envoi de newsletters:</div>
+                  <div class="col-4 card-text">{{ featuresList.sendnewsletters ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Gestion des plannings:</div>
+                  <div class="col-4 card-text">{{ featuresList.planningmanager ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Vente de boissons:</div>
+                  <div class="col-4 card-text">{{ featuresList.selldrinks ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Vente d'équipements:</div>
+                  <div class="col-4 card-text">{{ featuresList.sellequipment ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 card-text">Abonnement premiums:</div>
+                  <div class="col-4 card-text">{{ featuresList.premiumplans ? "Oui" : "Non" }}</div>
+                </div>
+              </div>
+              <div class="row justify-content-around mt-2">
+                  <a href="/update-featuresList/{{ featuresList.id }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+              </div>
+            </div>
+        {% endfor %}
+      </section>
+
+  </div>
+{% endblock %}
