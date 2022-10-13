@@ -13,10 +13,13 @@ class FranchiseeType extends AbstractType {
     $builder 
         ->add("name", TextType::class, ["label" => "Nom"])
         ->add("email", TextType::class, ["label" => "Email"])
-        ->add("active", CheckboxType::class, [
-          "label" => "Activer la franchise immediatement",
-          "required" => false,
-          "data" => true
+        ->add('active', CheckboxType::class, [
+          'label' => "Franchisé actif",
+          'required' => false,
+          'data' => true,
+          'label_attr' => [
+            'class' => 'checkbox-switch',
+          ]
         ]);
   }
 

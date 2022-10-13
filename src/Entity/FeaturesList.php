@@ -115,11 +115,34 @@ class FeaturesList
     {
         return $this->structure;
     }
-
+    
     public function setStructure(?Structure $structure): self
     {
-        $this->structure = $structure;
-
-        return $this;
+      $this->structure = $structure;
+      
+      return $this;
     }
-}
+
+    public function structureCheck() {
+  
+      $dataFeatures = $this->getStructure();
+
+       if ($dataFeatures != null) {
+           return false;
+       }
+
+      return true;
+    }
+
+    public function __toString(): string
+    {
+      return $this->getStructure();
+    }
+
+    public function __clone() {
+      $copyStructure = $this->structure;
+      unset($this->structure); // Unset breaks references
+      $this->structure = $copyStructure;
+    }
+
+  }

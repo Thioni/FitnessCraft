@@ -9,12 +9,8 @@
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
         {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            <script src="{{ asset('javascript/bootstrap.bundle.min.js') }}"></script>
-        {% endblock %}
     </head>
+
 
     <body>
 
@@ -59,6 +55,8 @@
       </nav>
 
         {% block body %}{% endblock %}
+        
+    <script src="{{ asset('javascript/bootstrap.bundle.min.js') }}"></script>
 
     </body>
 </html>

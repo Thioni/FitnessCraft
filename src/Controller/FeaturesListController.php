@@ -20,10 +20,16 @@ class FeaturesListController extends AbstractController {
     $featuresListForm->handleRequest($request);
 
     if ($featuresListForm->isSubmitted() && $featuresListForm->isValid()) {
-      $em = $doctrine->getManager();
-      $em->persist($featuresList);
-      $em->flush();
-      return $this->redirectToRoute("featuresList_list");
+
+      if (!$featuresList->structureCheck()) {
+        $this->addFlash('error', 'Création impossible: la structure choisie dispose déja d\'une liste de permissions');
+        return $this->redirectToRoute('featuresList_list');
+      }
+      
+        $em = $doctrine->getManager();
+        $em->persist($featuresList);
+        $em->flush();
+        return $this->redirectToRoute("featuresList_list");
     }
 
     return $this->renderForm("featuresList/create.html.twig", [
@@ -58,9 +64,11 @@ class FeaturesListController extends AbstractController {
     $featuresListForm = $this->createForm(featuresListType::class, $featuresList);
     $featuresListForm->handleRequest($request);
 
+
     if ($featuresListForm->isSubmitted() && $featuresListForm->isValid()) {
+
       $doctrine->getManager()->flush();
-      $this->addFlash('error', 'featuresList modifiée');
+      $this->addFlash('error', 'Options modifiées');
       return $this->redirectToRoute("featuresList_list");
     }
 
