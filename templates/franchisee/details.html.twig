@@ -23,6 +23,23 @@
 
     <h2 class="text-center">Structures du franchisé</h2>
       <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for structure in structures %}
+        {% if structure.managedby == franchisee.name %}
+          <div class="card m-1 bg-success" style="width: 25rem;">   
+            <div class="card-body">
+              <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
+                <div class="row">
+                  <div class="col-6 card-text fw-bold">EMAIL:</div>
+                  <div class="col-6 card-text">{{ structure.manageremail }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-6 card-text fw-bold">ACTIVE:</div>
+                  <div class="col-6 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
+                </div>
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
       </section>
 
       <div class="row justify-content-center">

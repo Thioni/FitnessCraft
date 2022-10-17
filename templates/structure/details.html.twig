@@ -5,8 +5,9 @@
 
   <div class="container-fluid">
 
+    <h1 class="text-center">Structure</h1>
       <section class="d-flex flex-wrap justify-content-center my-5">
-               <div class="card m-1 bg-success" style="width: 40rem;">
+            <div class="card m-1 bg-success" style="width: 40rem;">
               <div class="card-body">
                 <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
                   <div class="row">
@@ -26,28 +27,29 @@
             <div class="card-body">
                 {% for featuresLists in featuresList %}
                 {% if featuresLists.structure == structure.name %}             
+                <h5 class="text-center">Options activées:</h5>
                 <div class="row">
-                  <div class="col-8 card-text">Ajout de nouveaux membres:</div>
+                  <div class="col-8 card-text fw-bold">Ajout de nouveaux membres:</div>
                   <div class="col-4 card-text">{{ featuresLists.addnewmembers ? "Oui" : "Non" }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-8 card-text">Envoi de newsletters:</div>
+                  <div class="col-8 card-text fw-bold">Envoi de newsletters:</div>
                   <div class="col-4 card-text">{{ featuresLists.sendnewsletters ? "Oui" : "Non" }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-8 card-text">Gestion des plannings:</div>
+                  <div class="col-8 card-text fw-bold">Gestion des plannings:</div>
                   <div class="col-4 card-text">{{ featuresLists.planningmanager ? "Oui" : "Non" }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-8 card-text">Vente de boissons:</div>
+                  <div class="col-8 card-text fw-bold">Vente de boissons:</div>
                   <div class="col-4 card-text">{{ featuresLists.selldrinks ? "Oui" : "Non" }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-8 card-text">Vente d'équipements:</div>
+                  <div class="col-8 card-text fw-bold">Vente d'équipements:</div>
                   <div class="col-4 card-text">{{ featuresLists.sellequipment ? "Oui" : "Non" }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-8 card-text">Abonnement premiums:</div>
+                  <div class="col-8 card-text fw-bold">Abonnement premiums:</div>
                   <div class="col-4 card-text">{{ featuresLists.premiumplans ? "Oui" : "Non" }}</div>
                 </div>
                 {% endif %}
