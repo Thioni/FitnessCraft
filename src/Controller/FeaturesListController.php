@@ -68,7 +68,7 @@ class FeaturesListController extends AbstractController {
     if ($featuresListForm->isSubmitted() && $featuresListForm->isValid()) {
 
       $doctrine->getManager()->flush();
-      $this->addFlash('error', 'Options modifiées');
+      $this->addFlash('error', 'Options sauvegardées');
       return $this->redirectToRoute("featuresList_list");
     }
 

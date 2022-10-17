@@ -2,13 +2,25 @@
 
 {% block body %}
 
-
   <div class="container-fluid">
 
-    <h1 class="text-center">Liste des Structures</h1>
+
+    <h1 class="text-center mb-5">Liste des Structures</h1>
+
+      <section class="row justify-content-center">
+        <div class="col-2 form-check form-switch">
+          <input id="toggleActiveStructures" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Structures Actives</label>
+        </div>
+        <div class="col-2 form-check form-switch">
+          <input id="toggleInactiveStructures" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <label class="form-check-label" for="flexSwitchCheckChecked">Structures Inactives</label>
+        </div>
+      </secton>
+
       <section class="d-flex flex-wrap justify-content-center my-5">
         {% for structure in structures %}
-            <div {% if structure.active == 1 %} addClass="active" {% endif %} class="card m-1 bg-success" style="width: 25rem;">
+            <div {% if structure.active == 1 %} class="active card m-1 bg-success" {% endif %} class="inactive card m-1 bg-success" style="width: 25rem;">
               <div class="card-body">
                 <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
                   <div class="row">
@@ -31,4 +43,7 @@
       </div>
 
   </div>
+
+  <script src="{{ asset('javascript/filtresStructure.js') }}"></script>
+
 {% endblock %}
