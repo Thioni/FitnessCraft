@@ -23,9 +23,11 @@ class StructureType extends AbstractType {
             "expanded" => false
         ])
         ->add("active", CheckboxType::class, [
-            "label" => "Activer la structure immediatement",
+            "label" => "Structure active",
             "required" => false,
-            "data" => true
+            'label_attr' => [
+              'class' => 'checkbox-switch',
+            ]
         ]);
   }
 

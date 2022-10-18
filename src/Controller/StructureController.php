@@ -64,7 +64,7 @@ class StructureController extends AbstractController {
 
     if ($structureForm->isSubmitted() && $structureForm->isValid()) {
       $doctrine->getManager()->flush();
-      $this->addFlash('error', 'structure modifié');
+      $this->addFlash('error', 'Structure modifiée');
       return $this->redirectToRoute("structure_list");
     }
 

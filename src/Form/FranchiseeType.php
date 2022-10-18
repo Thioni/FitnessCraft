@@ -16,7 +16,6 @@ class FranchiseeType extends AbstractType {
         ->add('active', CheckboxType::class, [
           'label' => "Franchisé actif",
           'required' => false,
-          'data' => true,
           'label_attr' => [
             'class' => 'checkbox-switch',
           ]

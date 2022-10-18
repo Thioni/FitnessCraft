@@ -39,28 +39,17 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Structure[] Returns an array of Structure objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+     public function changeStatus() 
+     {
+        $this->getEntityManager()
+        ->getConnection()
+        ->executeStatement(
+          "UPDATE structure
+           JOIN franchisee
+           SET structure.active = 0
+           WHERE managed_by_id = franchisee.id
+           AND franchisee.active = 1"
+        );
+     }
 
-//    public function findOneBySomeField($value): ?Structure
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
