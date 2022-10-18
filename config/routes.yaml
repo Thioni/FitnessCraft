@@ -1,7 +1,3 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
-
-delete_agent:
-  path: /delete-agent/{id}
-  controller: App\Controller\AgentController::delete
