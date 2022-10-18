@@ -26,14 +26,20 @@
 
       <section class="d-flex flex-wrap justify-content-center my-5">
         {% for structure in structures %}
-            <div {% if structure.active == 1 %} class="active card m-1 bg-success" {% endif %} class="inactive card m-1 bg-success" style="width: 25rem;">
+            <div {% if structure.active == 1 %} class="active card m-1 bg-secondary" {% endif %} class="inactive card m-1 bg-danger" style="width: 25rem;">
               <div class="card-body">
                 <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
                   <div class="row">
-                    <div class="col-6 card-text fw-bold">EMAIL:</div>
-                    <div class="col-6 card-text">{{ structure.manageremail }}</div>
-                    <div class="col-6 card-text fw-bold">ACTIVE:</div>
-                    <div class="col-6 card-text">{{ structure.active ? "Oui" : "Non" }}</div>
+                    <div class="col-4 card-text fw-bold">MANAGER:</div>
+                    <div class="col-8 card-text">{{ structure.managerfirstname|capitalize }} {{ structure.managerlastname|capitalize }}</div>
+                    <div class="col-4 card-text fw-bold">EMAIL:</div>
+                    <div class="col-8 card-text">{{ structure.manageremail }}</div>
+                    <div class="col-4 card-text fw-bold">ADRESSE:</div>
+                    <div class="col-8 card-text">{{ structure.adress }}</div>
+                    <div class="col-4 card-text fw-bold">VILLE:</div>
+                    <div class="col-8 card-text">{{ structure.city }}</div>
+                    <div class="col-4 card-text fw-bold">ACTIVE:</div>
+                    <div class="col-8 card-text">{{ structure.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
 

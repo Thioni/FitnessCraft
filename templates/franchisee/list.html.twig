@@ -26,16 +26,16 @@
 
       <section class="d-flex flex-wrap justify-content-center my-5">
         {% for franchisee in franchisees %}
-            <div {% if franchisee.active == 1 %} class="active card m-1 bg-success" {% endif %} class="inactive card m-1 bg-success" style="width: 25rem;">
+            <div {% if franchisee.active == 1 %} class="active card m-1 bg-success" {% endif %} class="inactive card m-1 bg-danger" style="width: 25rem;">
               <div class="card-body">
                 <h5 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h5>
                   <div class="row">
-                    <div class="col-6 card-text fw-bold">EMAIL:</div>
-                    <div class="col-6 card-text">{{ franchisee.email }}</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 card-text fw-bold">ACTIVE:</div>
-                    <div class="col-6 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
+                    <div class="col-4 card-text fw-bold">DIRECTEUR:</div>
+                    <div class="col-8 card-text">{{ franchisee.directorfirstname|capitalize }} {{ franchisee.directorlastname|capitalize }}</div>
+                    <div class="col-4 card-text fw-bold">EMAIL:</div>
+                    <div class="col-8 card-text">{{ franchisee.email }}</div>
+                    <div class="col-4 card-text fw-bold">ACTIF:</div>
+                    <div class="col-8 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
               <div class="row justify-content-around">

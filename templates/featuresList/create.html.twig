@@ -57,13 +57,28 @@
           </div>
         </section>
 
+        {% if app.request.get("_route") == "create_featuresList" %}
           <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('featuresList_list') }}" class="btn btn-warning">Annuler</a>
+            </div>
             <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
-              <input type="submit" value="Valider" id="submitForm" class="btn btn-warning mt-3">
+              <input type="submit" value="créer" class="btn btn-success mt-3">
             </div>
           </section>
+        {% else %}
+          <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('featuresList_list') }}" class="btn btn-success">Annuler</a>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="modifier" class="btn btn-warning mt-3">
+            </div>
+          </section>
+        {% endif %}
+
       {{ form_end(featuresListForm, {'render_rest': false}) }}
-      
+
 
   <script src="{{ asset('javascript/app.js') }}"></script>
 

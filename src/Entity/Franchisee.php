@@ -6,6 +6,7 @@ use App\Repository\FranchiseeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FranchiseeRepository::class)]
 class Franchisee
@@ -16,9 +17,36 @@ class Franchisee
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
+    #[Assert\Length (
+      min: 2,
+      max: 60,
+      minMessage: 'Le nom doit comporter au moins 2 caractères',
+      maxMessage: 'Le nom doit comporter au maximum 20 caractères'
+    )]
     private ?string $name = null;
 
+    #[ORM\Column(length: 20)]
+    #[Assert\Length (
+      min: 2,
+      max: 20,
+      minMessage: 'Le prénom doit comporter au moins 2 caractères',
+      maxMessage: 'Le prénom doit comporter au maximum 20 caractères'
+    )]
+    private ?string $director_firstname = null;
+
+    #[ORM\Column(length: 20)]
+    #[Assert\Length (
+      min: 2,
+      max: 20,
+      minMessage: 'Le nom de famille doit comporter au moins 2 caractères',
+      maxMessage: 'Le nom de famille doit comporter au maximum 20 caractères'
+    )]
+    private ?string $director_lastname = null;
+
     #[ORM\Column(length: 254)]
+    #[Assert\Email(
+      message: 'L\'adresse {{ value }} n\'est pas une adresse valide',
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -102,7 +130,31 @@ class Franchisee
 
         return $this;
     }
+    
+    public function getDirectorFirstname(): ?string
+    {
+      return $this->director_firstname;
+    }
+    
+    public function setDirectorFirstname(string $director_firstname): self
+    {
+      $this->director_firstname = $director_firstname;
+      
+      return $this;
+    }
 
+    public function getDirectorLastName(): ?string
+    {
+        return $this->director_lastname;
+    }
+      
+    public function setDirectorLastName(string $director_lastname): self
+    {
+      $this->director_lastname = $director_lastname;
+      
+      return $this;
+    }
+    
     public function __toString(): string
     {
       return $this->getName();

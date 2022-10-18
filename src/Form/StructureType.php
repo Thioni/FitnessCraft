@@ -15,6 +15,9 @@ class StructureType extends AbstractType {
     $builder 
         ->add("name", TextType::class, ["label" => "Nom"])
         ->add("adress", TextType::class, ["label" => "Adresse"])
+        ->add("city", TextType::class, ["label" => "Ville"])
+        ->add("manager_firstname", TextType::class, ["label" => "Prénom du manager"])
+        ->add("manager_lastname", TextType::class, ["label" => "Nom du manager"])
         ->add("manager_email", TextType::class, ["label" => "Email"])
         ->add("managed_by", EntityType::class, [
             "class" => Franchisee::class,
@@ -23,7 +26,7 @@ class StructureType extends AbstractType {
             "expanded" => false
         ])
         ->add("active", CheckboxType::class, [
-            "label" => "Structure active",
+            "label" => "Active",
             "required" => false,
             'label_attr' => [
               'class' => 'checkbox-switch',

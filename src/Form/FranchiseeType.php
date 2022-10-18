@@ -12,6 +12,8 @@ class FranchiseeType extends AbstractType {
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder 
         ->add("name", TextType::class, ["label" => "Nom"])
+        ->add("director_firstname", TextType::class, ["label" => "Prénom du directeur"])
+        ->add("director_lastname", TextType::class, ["label" => "Nom du directeur"])
         ->add("email", TextType::class, ["label" => "Email"])
         ->add('active', CheckboxType::class, [
           'label' => "Franchisé actif",

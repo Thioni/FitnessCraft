@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StructureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
 class Structure
@@ -14,12 +15,52 @@ class Structure
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
+    #[Assert\Length (
+      max: 60,
+      maxMessage: 'Le nom doit comporter au maximum 60 caractères'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Length (
+      min: 10,
+      max: 100,
+      minMessage: 'L\'adresse doit comporter au moins 10 caractères',
+      maxMessage: 'L\'adresse doit comporter au maximum 100 caractères'
+    )]
     private ?string $adress = null;
 
+    #[ORM\Column(length: 45)]
+    #[Assert\Length (
+      min: 2,
+      max: 45,
+      minMessage: 'Le nom de la ville doit comporter au moins 2 caractères',
+      maxMessage: 'Le nom de la ville doit comporter au maximum 45 caractères'
+    )]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 20)]
+    #[Assert\Length (
+      min: 2,
+      max: 20,
+      minMessage: 'Le prénom doit comporter au moins 2 caractères',
+      maxMessage: 'Le prénom doit comporter au maximum 20 caractères'
+    )]
+    private ?string $manager_firstname = null;
+
+    #[ORM\Column(length: 20)]
+    #[Assert\Length (
+      min: 2,
+      max: 20,
+      minMessage: 'Le nom de famille doit comporter au moins 2 caractères',
+      maxMessage: 'Le nom de famille doit comporter au maximum 20 caractères'
+    )]
+    private ?string $manager_lastname = null;
+
     #[ORM\Column(length: 254)]
+    #[Assert\Email(
+      message: 'L\'email {{ value }} n\'est pas une adresse valide',
+    )]
     private ?string $manager_email = null;
 
     #[ORM\Column]
@@ -49,6 +90,18 @@ class Structure
         return $this;
     }
 
+    public function getcity(): ?string
+    {
+      return $this->city;
+    }
+    
+    public function setcity(string $city): self
+    {
+      $this->city = $city;
+      
+      return $this;
+    }
+    
     public function getAdress(): ?string
     {
         return $this->adress;
@@ -58,6 +111,30 @@ class Structure
     {
         $this->adress = $adress;
 
+        return $this;
+    }
+
+    public function getManagerFirstname(): ?string
+    {
+      return $this->manager_firstname;
+    }
+    
+    public function setManagerFirstname(string $manager_firstname): self
+    {
+      $this->manager_firstname = $manager_firstname;
+      
+      return $this;
+    }
+    
+    public function getManagerLastname(): ?string
+    {
+      return $this->manager_lastname;
+    }
+    
+    public function setManagerLastname(string $manager_lastname): self
+    {
+      $this->manager_lastname = $manager_lastname;
+      
         return $this;
     }
 
@@ -118,10 +195,10 @@ class Structure
 
         return $this;
     }
-
+          
     public function __toString(): string
     {
       return $this->getName();
     }
-    
-}
+
+}    

@@ -26,36 +26,52 @@
             {{ form_row(structureForm.adress) }}
           </div>
           <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
-            {{ form_row(structureForm.manager_email) }}
+            {{ form_row(structureForm.city) }}
           </div>
+        </section>
 
         <section class="row m-0 justify-content-center">
-          <div class="col-8 col-sm-6 col-xxl-8 text-center rounded"> 
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(structureForm.manager_firstname) }}
+          </div>
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(structureForm.manager_lastname) }}
+          </div>
+          <div class="mt-1 col-sm-4 col-lg-3 col-xl-3 col-xxl-2 text-center">
+            {{ form_row(structureForm.manager_email) }}
+          </div>
+        </section>
+
+        <section class="row m-0 justify-content-center">
+          <div class="col-8 col-sm-4 col-xxl-2 text-center rounded"> 
             {{ form_row(structureForm.managed_by) }}
           </div>
         </section>
 
         <section class="row m-0 justify-content-center">
-          <div class="col col-sm-6 col-lg-4 col-xxl-3 text-center rounded"> 
+          <div class="col col-sm-6 col-lg-4 col-xxl-1 text-center rounded"> 
             {{ form_row(structureForm.active) }}
           </div>
         </section>
 
         {% if app.request.get("_route") == "create_structure" %}
-        <section class="row m-0 justify-content-center">
-          <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
-            <input type="submit" value="créer" class="btn btn-success mt-3 mb-5">
-          </div>
-        </section>
+          <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('structure_list') }}" class="btn btn-warning">Annuler</a>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="créer" class="btn btn-success mt-3">
+            </div>
+          </section>
         {% else %}
-        <section class="row m-0 mb-5 justify-content-center">
-          <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
-            <a href="/structure-list" class="btn btn-success">Annuler</a>
-          </div>
-          <div class="col-3 col-sm-2 col-xl-1 text-center"> 
-            <input type="submit" value="Modifier" class="btn btn-warning mt-3">
-          </div>
-        </section>
+          <section class="row m-0 justify-content-center">
+            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
+              <a href="{{ path('structure_list') }}" class="btn btn-success">Annuler</a>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
+              <input type="submit" value="modifier" class="btn btn-warning mt-3">
+            </div>
+          </section>
         {% endif %}
 
       {{ form_end(structureForm) }}

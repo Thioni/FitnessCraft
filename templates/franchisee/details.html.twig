@@ -7,12 +7,16 @@
 
     <h1 class="text-center">Franchisé</h1>
       <section class="d-flex flex-wrap justify-content-center my-5">
-            <div class="card m-1 bg-secondary" style="width: 25rem;">
+            <div class="card m-1 bg-success" style="width: 25rem;">
               <div class="card-body">
                 <h5 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h5>
                   <div class="row">
-                    <div class="col-12 card-text fw-bold">EMAIL:</div>
-                    <div class="col-12 card-text">{{ franchisee.email }}</div>
+                    <div class="col-4 card-text fw-bold">DIRECTEUR:</div>
+                    <div class="col-8 card-text">{{ franchisee.directorfirstname|capitalize }} {{ franchisee.directorlastname|capitalize }}</div>
+                    <div class="col-4 card-text fw-bold">EMAIL:</div>
+                    <div class="col-8 card-text">{{ franchisee.email }}</div>
+                    <div class="col-4 card-text fw-bold">ACTIF:</div>
+                    <div class="col-8 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
               <div class="row justify-content-around mt-2">
@@ -25,16 +29,20 @@
       <section class="d-flex flex-wrap justify-content-center my-5">
         {% for structure in structures %}
         {% if structure.managedby == franchisee.name %}
-          <div class="card m-1 bg-success" style="width: 25rem;">   
+          <div class="card m-1 bg-secondary" style="width: 25rem;">   
             <div class="card-body">
               <h5 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h5>
                 <div class="row">
-                  <div class="col-6 card-text fw-bold">EMAIL:</div>
-                  <div class="col-6 card-text">{{ structure.manageremail }}</div>
-                </div>
-                <div class="row">
-                  <div class="col-6 card-text fw-bold">ACTIVE:</div>
-                  <div class="col-6 card-text">{{ structure.active ? "Oui" : "Non" }}</div>
+                  <div class="col-4 card-text fw-bold">MANAGER:</div>
+                  <div class="col-8 card-text">{{ structure.managerfirstname|capitalize }} {{ structure.managerlastname|capitalize }}</div>
+                  <div class="col-4 card-text fw-bold">EMAIL:</div>
+                  <div class="col-8 card-text">{{ structure.manageremail }}</div>
+                  <div class="col-4 card-text fw-bold">ADRESSE:</div>
+                  <div class="col-8 card-text">{{ structure.adress }}</div>
+                  <div class="col-4 card-text fw-bold">VILLE:</div>
+                  <div class="col-8 card-text">{{ structure.city }}</div>
+                  <div class="col-4 card-text fw-bold">ACTIVE:</div>
+                  <div class="col-8 card-text">{{ structure.active ? "Oui" : "Non" }}</div>
                 </div>
             </div>
           </div>
