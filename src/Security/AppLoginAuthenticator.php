@@ -46,6 +46,11 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        $user = $token->getUser();
+        if (in_array("ROLE_FRANCHISEE", $user->getRoles())) {
+          return new RedirectResponse($this->urlGenerator->generate('structure_list'));
+          }
+
         return new RedirectResponse($this->urlGenerator->generate('franchisee_list'));
     }
 
