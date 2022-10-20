@@ -9,12 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController {
 
   #[Route("admin/create-franchisee-user", name: "create_franchisee_user")]
   #[Route("admin/create-structure-user", name: "create_structure_user")]
-  public function create(Request $request, ManagerRegistry $doctrine): Response {
+  public function create(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher, MailerInterface $mailer): Response {
     $user = new User();
 
     $userForm = $this->createForm(UserType::class, $user);
@@ -29,7 +32,24 @@ class UserController extends AbstractController {
       } else if (($request->get('_route') == "create_structure_user")) {
                     $user->setRoles(['ROLE_STRUCTURE']);
       }
+      
+       // Envoi de l'email au nouvel utilisateur
+      $email = (new Email())
+      ->from('fitnesscraftstaff@gmail.com')
+      ->to($user->getEmail())
+      ->subject('Changement de mot de passe')
+      ->text('Bienvenue chez FitnessCraft! Votre mot de passe temporaire est: ' .$user->getPassword());
+      
+      $mailer->send($email);
 
+        // Hashage du mot de passe
+      $user->setPassword(
+        $userPasswordHasher->hashPassword(
+          $user,
+          $userForm->get('password')->getData()
+        )
+      );
+      
       $em->persist($user);
       $em->flush();
       return $this->redirectToRoute("franchisee_list");

@@ -5,6 +5,7 @@
 
   <div class="container-fluid">
 
+      {% if app.user.franchiseeaccount.active == 1 %}
       <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
 
       <section class="d-flex flex-wrap justify-content-center my-5">
@@ -78,6 +79,12 @@
         {% endif %}
         {% endfor %}
       </section>
+      {% elseif app.user.franchiseeaccount.active == 0 %}
+
+      <h1 class="text-center">Ce compte est actuellement désactivé</h1>
+      <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
+
+      {% endif %}
 
   </div>
 {% endblock %}

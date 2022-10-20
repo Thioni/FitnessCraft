@@ -2,16 +2,20 @@
 
 {% block body %}
 
-
   <div class="container-fluid">
 
+      {% if app.user.structureaccount.active == 1 %}
       <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
+
+      <h3 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.managedby.active }}</h3>
 
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 50rem;">
               <div class="card-body">
                 <h3 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.name }}</h3>
                   <div class="row">
+                    <div class="col-4 fw-bold">FRANCHISÉ:</div>
+                    <div class="col-8">{{ app.user.structureaccount.managedby }}</div>
                     <div class="col-4 fw-bold">MANAGER:</div>
                     <div class="col-8">{{ app.user.structureaccount.managerfirstname|capitalize }} {{ app.user.structureaccount.managerlastname|capitalize }}</div>
                     <div class="col-4 fw-bold">EMAIL:</div>
@@ -60,6 +64,13 @@
         {% endif %}
         {% endfor %}
       </section>
+      {% elseif app.user.structureaccount.active == 0 %}
+
+      <h1 class="text-center">Ce compte est actuellement désactivé</h1>
+      <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
+
+      {% endif %}
 
   </div>
+
 {% endblock %}
