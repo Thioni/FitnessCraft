@@ -16,6 +16,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-success">
         <div class="container-fluid">
+      {% if is_granted('ROLE_ADMIN') %}
           <a class="navbar-brand fw-bold text-light" href="/">FitnessCraft</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,8 +49,17 @@
                   <li><a class="dropdown-item text-light" href="{{ path('featuresList_list') }}">Liste</a></li>
                   <li><a class="dropdown-item text-light" href="{{ path('create_featuresList') }}">Créer</a></li>
                 </ul>
+      {% endif %}
               </li>
             </ul>
+            <div class="text-light">
+              {% if app.user %}
+                  <span>Bonjour, </span> <span class="fw-bold">{{ app.user.email }} </span>
+                  <a href="{{ path('app_logout') }}" class="btn btn-danger ms-md-3">Se déconnecter</a>
+              {% else %}
+              <a href="/login" class="btn btn-success">Se connecter</a>
+            </div>
+              {% endif %}
           </div>
         </div>
       </nav>

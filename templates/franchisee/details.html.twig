@@ -5,6 +5,8 @@
 
   <div class="container-fluid">
 
+    {% if is_granted('ROLE_ADMIN') %}
+
     <h1 class="text-center">Franchisé</h1>
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 25rem;">
@@ -45,6 +47,10 @@
                   <div class="col-8 card-text">{{ structure.active ? "Oui" : "Non" }}</div>
                 </div>
             </div>
+
+            <div class="row justify-content-around">
+                <a href="{{ path('structure_details', {'id': structure.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>
+            </div>
           </div>
         {% endif %}
         {% endfor %}
@@ -53,6 +59,8 @@
       <div class="row justify-content-center">
         <a href="{{ path('franchisee_list') }}" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
       </div>
+
+    {% endif %}
 
   </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FeaturesList;
+use App\Entity\Franchisee;
 use App\Entity\Structure;
 use App\Form\StructureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class StructureController extends AbstractController {
 
-  #[Route("/create-structure", name: "create_structure")]
+  #[Route("admin/create-structure", name: "create_structure")]
   public function create(Request $request, ManagerRegistry $doctrine): Response {
     $structure = new structure();
 
@@ -32,7 +33,7 @@ class StructureController extends AbstractController {
     ]);
   }
 
-  #[Route("/structure-list", name: "structure_list")]
+  #[Route("admin/structure-list", name: "structure_list")]
   public function getAll(ManagerRegistry $doctrine): Response {
     $repo = $doctrine->getRepository(structure::class);
     $structures = $repo->findAll();
@@ -42,7 +43,7 @@ class StructureController extends AbstractController {
     ]);
   }
 
-  #[Route("/structure-details/{id}", name: "structure_details")]
+  #[Route("admin/structure-details/{id}", name: "structure_details")]
   public function getDetails(ManagerRegistry $doctrine, int $id): Response {
 
     $repo = $doctrine->getRepository(structure::class);
@@ -56,7 +57,24 @@ class StructureController extends AbstractController {
     ]);
   }
 
-  #[Route("/update-structure/{id}", name: "update_structure")]
+  #[Route("structure-account", name: "structure_account")]
+  public function getAccount(ManagerRegistry $doctrine): Response {
+
+    $repo = $doctrine->getRepository(Franchisee::class);
+    $franchisee = $repo->findAll();
+    $repo = $doctrine->getRepository(structure::class);
+    $structure = $repo->findAll();
+    $repo = $doctrine->getRepository(FeaturesList::class);
+    $featuresList = $repo->findAll();
+
+    return $this->renderForm("structure/account.html.twig", [
+        "franchisee" => $franchisee,
+        "structure" => $structure,
+        "featuresList" => $featuresList
+    ]);
+  }
+
+  #[Route("admin/update-structure/{id}", name: "update_structure")]
   public function update(Request $request, ManagerRegistry $doctrine, structure $structure): Response {
 
     $structureForm = $this->createForm(structureType::class, $structure);
@@ -74,7 +92,7 @@ class StructureController extends AbstractController {
     ]);
   }
 
-  #[Route("/delete-structure/{id}", name: "delete_structure")]
+  #[Route("admin/delete-structure/{id}", name: "delete_structure")]
   public function delete(ManagerRegistry $doctrine, structure $structure): Response {
 
     $em = $doctrine->getManager();

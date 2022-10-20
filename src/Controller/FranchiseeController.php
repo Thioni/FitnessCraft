@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\FeaturesList;
 use App\Entity\Franchisee;
 use App\Entity\Structure;
 use App\Form\FranchiseeType;
-use App\Repository\FranchiseeRepository;
 use App\Repository\StructureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class FranchiseeController extends AbstractController {
 
-  #[Route("/create-franchisee", name: "create_franchisee")]
+  #[Route("admin/create-franchisee", name: "create_franchisee")]
   public function create(Request $request, ManagerRegistry $doctrine): Response {
     $franchisee = new Franchisee();
 
@@ -34,7 +34,7 @@ class FranchiseeController extends AbstractController {
     ]);
   }
 
-  #[Route("/franchisee-list", name: "franchisee_list")]
+  #[Route("admin/franchisee-list", name: "franchisee_list")]
   public function getAll(ManagerRegistry $doctrine): Response {
     $repo = $doctrine->getRepository(Franchisee::class);
     $franchisees = $repo->findAll();
@@ -44,7 +44,7 @@ class FranchiseeController extends AbstractController {
     ]);
   }
   
-  #[Route("/franchisee-details/{id}", name: "franchisee_details")]
+  #[Route("admin/franchisee-details/{id}", name: "franchisee_details")]
   public function getDetails(ManagerRegistry $doctrine, int $id): Response {
     
     $repo = $doctrine->getRepository(Franchisee::class);
@@ -58,7 +58,24 @@ class FranchiseeController extends AbstractController {
     ]);
   }
 
-  #[Route("/update-franchisee/{id}", name: "update_franchisee")]
+  #[Route("/franchisee-account", name: "franchisee_account")]
+  public function getAccount(ManagerRegistry $doctrine): Response {
+    
+    $repo = $doctrine->getRepository(Franchisee::class);
+    $franchisee = $repo->findAll();
+    $repo = $doctrine->getRepository(Structure::class);
+    $structures = $repo->findAll();
+    $repo = $doctrine->getRepository(FeaturesList::class);
+    $featuresList = $repo->findAll();
+      
+      return $this->renderForm("franchisee/account.html.twig", [
+        "franchisee" => $franchisee,
+        "structures" => $structures,
+        "featuresList" => $featuresList
+    ]);
+  }
+
+  #[Route("admin/update-franchisee/{id}", name: "update_franchisee")]
   public function update(StructureRepository $er, Request $request, ManagerRegistry $doctrine, Franchisee $franchisee): Response {
 
     $franchiseeForm = $this->createForm(FranchiseeType::class, $franchisee);

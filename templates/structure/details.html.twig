@@ -24,8 +24,8 @@
                   </div>
               </div>
               <div class="row justify-content-around mt-2">
-                <a href="/update-structure/{{ structure.id }}" class="col-3 btn btn-warning mb-2">Modifier</a>
-                <a href="/delete-structure/{{ structure.id }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
+                <a href="{{ path('update_structure', {'id': structure.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+                <a href="{{ path('delete_structure', {'id': structure.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
               </div>
             </div>
       </section>
@@ -68,7 +68,7 @@
       
 
       <div class="row justify-content-center">
-        <a href="/structure-list" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
+        <a href="{{ path('structure_list', {'id': structure.id}) }}" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
       </div>
 
   </div>

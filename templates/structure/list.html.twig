@@ -44,14 +44,16 @@
               </div>
 
               <div class="row justify-content-around">
-                <a href="/structure-details/{{ structure.id }}" class="col-3 btn btn-primary mb-2">Détails</a>
+                <a href="{{ path('update_structure', {'id': structure.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+                <a href="{{ path('structure_details', {'id': structure.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>
+                <a href="{{ path('delete_structure', {'id': structure.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
               </div>
             </div>
         {% endfor %}
       </section>
 
       <div class="row justify-content-center">
-        <a href="/" class="col-2 col-md-1 btn btn-success mb-5">Retour</a>
+        <a href="{{ path('franchisee_list') }}" class="col-2 col-md-1 btn btn-success mb-5">Retour aux franchisés</a>
       </div>
 
   </div>

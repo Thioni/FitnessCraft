@@ -48,7 +48,9 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
 
         $user = $token->getUser();
         if (in_array("ROLE_FRANCHISEE", $user->getRoles())) {
-          return new RedirectResponse($this->urlGenerator->generate('structure_list'));
+          return new RedirectResponse($this->urlGenerator->generate('franchisee_account'));
+          } else if (in_array("ROLE_STRUCTURE", $user->getRoles())) {
+              return new RedirectResponse($this->urlGenerator->generate('structure_account'));
           }
 
         return new RedirectResponse($this->urlGenerator->generate('franchisee_list'));

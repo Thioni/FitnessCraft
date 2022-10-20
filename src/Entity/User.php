@@ -31,6 +31,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Franchisee $franchisee_account = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Structure $structure_account = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -99,5 +105,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getFranchiseeAccount(): ?Franchisee
+    {
+        return $this->franchisee_account;
+    }
+
+    public function setFranchiseeAccount(?Franchisee $franchisee_account): self
+    {
+        $this->franchisee_account = $franchisee_account;
+
+        return $this;
+    }
+
+    public function getStructureAccount(): ?Structure
+    {
+        return $this->structure_account;
+    }
+
+    public function setStructureAccount(?Structure $structure_account): self
+    {
+        $this->structure_account = $structure_account;
+
+        return $this;
     }
 }

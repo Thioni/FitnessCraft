@@ -139,10 +139,4 @@ class FeaturesList
       return $this->getStructure();
     }
 
-    public function __clone() {
-      $copyStructure = $this->structure;
-      unset($this->structure); // Unset breaks references
-      $this->structure = $copyStructure;
-    }
-
   }

@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+  <div class="container-fluid">
+
+      <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
+
+      <section class="d-flex flex-wrap justify-content-center my-5">
+            <div class="card m-1 bg-success" style="width: 50rem;">
+              <div class="card-body">
+                <h3 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.name }}</h3>
+                  <div class="row">
+                    <div class="col-4 fw-bold">MANAGER:</div>
+                    <div class="col-8">{{ app.user.structureaccount.managerfirstname|capitalize }} {{ app.user.structureaccount.managerlastname|capitalize }}</div>
+                    <div class="col-4 fw-bold">EMAIL:</div>
+                    <div class="col-8">{{ app.user.structureaccount.manageremail }}</div>
+                    <div class="col-4 fw-bold">ACTIF:</div>
+                    <div class="col-8 text-light">{{ app.user.structureaccount.active ? "Oui" : "Non" }}</div>
+                  </div>
+              </div>
+            </div>            
+      </section>
+
+      <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for featuresLists in featuresList %}
+        {% if featuresLists.structure == app.user.structureaccount.name %}
+          <div class="card m-1 bg-info" style="width: 35rem;">   
+            <div class="card-body">
+
+              <h5 class="text-center fw-bold mb-4">OPTIONS SOUSCRITES</h5>
+                <div class="row">
+                  <div class="col-8 fw-bold">Ajout de nouveaux membres:</div>
+                  <div class="col-4">{{ featuresLists.addnewmembers ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 fw-bold">Envoi de newsletters:</div>
+                  <div class="col-4">{{ featuresLists.sendnewsletters ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 fw-bold">Gestion des plannings:</div>
+                  <div class="col-4">{{ featuresLists.planningmanager ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 fw-bold">Vente de boissons:</div>
+                  <div class="col-4">{{ featuresLists.selldrinks ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 fw-bold">Vente d'équipements:</div>
+                  <div class="col-4">{{ featuresLists.sellequipment ? "Oui" : "Non" }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-8 fw-bold">Abonnement premiums:</div>
+                  <div class="col-4">{{ featuresLists.premiumplans ? "Oui" : "Non" }}</div>
+                </div>
+
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+      </section>
+
+  </div>
+{% endblock %}
