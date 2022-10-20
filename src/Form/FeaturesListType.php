@@ -14,7 +14,7 @@ class FeaturesListType extends AbstractType {
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder 
         ->add("structure", EntityType::class, [
-        'label' => "Quelle structure est concernée ?",
+        'label' => "Structure",
         'class' => Structure::class,
         'multiple' => false,
         'expanded' => false,

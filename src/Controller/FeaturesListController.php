@@ -21,11 +21,6 @@ class FeaturesListController extends AbstractController {
 
     if ($featuresListForm->isSubmitted() && $featuresListForm->isValid()) {
 
-      if ($featuresList->structureCheck()) {
-        $this->addFlash('error', 'Création impossible: la structure choisie dispose déja d\'une liste de permissions');
-        return $this->redirectToRoute('featuresList_list');
-      }
-      
         $em = $doctrine->getManager();
         $em->persist($featuresList);
         $em->flush();

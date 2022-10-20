@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Repository\FeaturesListRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: FeaturesListRepository::class)]
+#[UniqueEntity('structure', 'La structure sélectionnée dispose déja d\'une liste de permissions')]
 class FeaturesList
 {
     #[ORM\Id]
@@ -121,17 +123,6 @@ class FeaturesList
       $this->structure = $structure;
       
       return $this;
-    }
-
-    public function structureCheck() {
-  
-      $dataFeatures = $this->getStructure();
-
-       if ($dataFeatures != null) {
-           return false;
-       }
-
-      return true;
     }
 
     public function __toString(): string
