@@ -2,19 +2,19 @@
 
 {% block body %}
 
-      {# {% if app.request.get("_route") == "create_user" %}
+      {% if app.request.get("_route") == "create_franchisee_user" %}
         <section class="row m-0 justify-content-center">
-          <div class="col-sm-3 col-lg-3 col-xl-3 text-center">
-            <h3>Créer une user</h3>
+          <div class="col text-center">
+            <h3>Créer un compte "franchisé"</h3>
           </div>
         </section>
       {% else %}
         <section class="row m-0 justify-content-center">
-          <div class="col-sm-3 col-lg-3 col-xl-2 text-center">
-            <h3>Modifier la user {{ user.name }}</h3>
+          <div class="col text-center">
+            <h3>Créer un compte "structure"</h3>
           </div>
         </section>
-      {% endif %} #}
+      {% endif %}
 
       {{ form_start(userForm) }}
 

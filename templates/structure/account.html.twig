@@ -3,11 +3,9 @@
 {% block body %}
 
   <div class="container-fluid">
-
       {% if app.user.structureaccount.active == 1 %}
       <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
 
-      <h3 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.managedby.active }}</h3>
 
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 50rem;">
@@ -61,14 +59,19 @@
 
             </div>
           </div>
+      </section>
         {% endif %}
         {% endfor %}
-      </section>
+
+      <div class="row text-center">
+        <div class="col">
+          <a class="btn btn-success" href="{{ path('password_change' )}}">Modification du mot de passe</a>
+        </div>
+      </div>
+
       {% elseif app.user.structureaccount.active == 0 %}
-
       <h1 class="text-center">Ce compte est actuellement désactivé</h1>
-      <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
-
+        <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
       {% endif %}
 
   </div>

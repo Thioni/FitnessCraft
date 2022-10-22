@@ -38,7 +38,8 @@ class UserController extends AbstractController {
       ->from('fitnesscraftstaff@gmail.com')
       ->to($user->getEmail())
       ->subject('Changement de mot de passe')
-      ->text('Bienvenue chez FitnessCraft! Votre mot de passe temporaire est: ' .$user->getPassword());
+      ->text('Bienvenue chez FitnessCraft! Votre mot de passe temporaire est: ' .$user->getPassword().
+      ' il vous sera demandé de le changer à votre première connexion.');
       
       $mailer->send($email);
 
