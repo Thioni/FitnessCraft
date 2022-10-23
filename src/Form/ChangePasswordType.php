@@ -37,7 +37,7 @@ class ChangePasswordType extends AbstractType
                     'pattern' => "$(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[\W])$",
                     'message' => 'Votre mot de passe doit inclure au moins une majuscule, une minuscule, un chiffre et un caractère spécial.'
                   ])
-                  ],
+                ],
             ]);
     }
 

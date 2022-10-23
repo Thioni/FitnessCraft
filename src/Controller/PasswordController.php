@@ -31,6 +31,7 @@ class PasswordController extends AbstractController
             $password = $passwordHasher->hashPassword($user, $new_pwd);
 
             $user->setPassword($password);
+            $user->setNewAccount(false);
             $this->entityManager->flush();
 
             $user->getRoles();

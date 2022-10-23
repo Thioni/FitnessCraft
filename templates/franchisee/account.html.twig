@@ -5,7 +5,12 @@
 
   <div class="container-fluid">
 
-      {% if app.user.franchiseeaccount.active == 1 %}
+      {% if app.user.franchiseeaccount.active == 1 and app.user.newaccount == 1 %}
+      <p>Vous devez choisir un mot de passe personnel avant de pouvoir consulter votre espace.</p>
+      <a href="{{ path('password_change') }}" class="btn btn-success">Changer le mot de passe</a>
+      {% endif %}
+
+      {% if app.user.franchiseeaccount.active == 1 and app.user.newaccount == 0 %}
       <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
 
       <section class="d-flex flex-wrap justify-content-center my-5">
@@ -20,13 +25,18 @@
                     <div class="col-4 fw-bold">ACTIF:</div>
                     <div class="col-8 text-light">{{ app.user.franchiseeaccount.active ? "Oui" : "Non" }}</div>
                   </div>
+                  <div class="row text-center mt-3">
+                    <div class="col">
+                      <a class="btn btn-warning" href="{{ path('password_change' )}}">Modification du mot de passe</a>
+                    </div>
+                  </div>
               </div>
             </div>
       </section>
 
+      {% for structure in structures %}
+      {% if structure.managedby == app.user.franchiseeaccount.name %}
       <section class="d-flex flex-wrap justify-content-center my-5">
-        {% for structure in structures %}
-        {% if structure.managedby == app.user.franchiseeaccount.name %}
           <div class="card m-1 bg-secondary" style="width: 35rem;">   
             <div class="card-body">
 
@@ -77,20 +87,13 @@
             </div>
           </div>
       </section>
-        {% endif %}
-        {% endfor %}
-
-      <div class="row text-center">
-        <div class="col">
-          <a class="btn btn-success" href="{{ path('password_change' )}}">Modification du mot de passe</a>
-        </div>
-      </div>
-
-      {% elseif app.user.franchiseeaccount.active == 0 %}
-      <h1 class="text-center">Ce compte est actuellement désactivé</h1>
-      <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
       {% endif %}
-
+      {% endfor %}
   </div>
+      
+  {% elseif app.user.franchiseeaccount.active == 0 %}
+  <h1 class="text-center">Ce compte est actuellement désactivé</h1>
+  <p class="text-center">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter notre service technique</p>
+  {% endif %}
 
 {% endblock %}

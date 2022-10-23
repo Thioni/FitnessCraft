@@ -3,10 +3,14 @@
 {% block body %}
 
   <div class="container-fluid">
-      {% if app.user.structureaccount.active == 1 %}
+
+      {% if app.user.structureaccount.active == 1 and app.user.newaccount == 1 %}
+      <p>Vous devez choisir un mot de passe personnel avant de pouvoir consulter votre espace.</p>
+      <a href="{{ path('password_change') }}" class="btn btn-success">Changer le mot de passe</a>
+      {% endif %}
+
+      {% if app.user.structureaccount.active == 1 and app.user.newaccount == 0 %}
       <h1 class="text-center mb-5">Bienvenue sur votre espace</h1>
-
-
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 50rem;">
               <div class="card-body">
@@ -21,16 +25,20 @@
                     <div class="col-4 fw-bold">ACTIF:</div>
                     <div class="col-8 text-light">{{ app.user.structureaccount.active ? "Oui" : "Non" }}</div>
                   </div>
+                  <div class="row text-center mt-3">
+                    <div class="col">
+                      <a class="btn btn-warning" href="{{ path('password_change' )}}">Modification du mot de passe</a>
+                    </div>
+                  </div>
               </div>
             </div>            
       </section>
 
+      {% for featuresLists in featuresList %}
+      {% if featuresLists.structure == app.user.structureaccount.name %}
       <section class="d-flex flex-wrap justify-content-center my-5">
-        {% for featuresLists in featuresList %}
-        {% if featuresLists.structure == app.user.structureaccount.name %}
           <div class="card m-1 bg-info" style="width: 35rem;">   
             <div class="card-body">
-
               <h5 class="text-center fw-bold mb-4">OPTIONS SOUSCRITES</h5>
                 <div class="row">
                   <div class="col-8 fw-bold">Ajout de nouveaux membres:</div>
@@ -56,18 +64,11 @@
                   <div class="col-8 fw-bold">Abonnement premiums:</div>
                   <div class="col-4">{{ featuresLists.premiumplans ? "Oui" : "Non" }}</div>
                 </div>
-
             </div>
           </div>
       </section>
-        {% endif %}
-        {% endfor %}
-
-      <div class="row text-center">
-        <div class="col">
-          <a class="btn btn-success" href="{{ path('password_change' )}}">Modification du mot de passe</a>
-        </div>
-      </div>
+      {% endif %}
+      {% endfor %}
 
       {% elseif app.user.structureaccount.active == 0 %}
       <h1 class="text-center">Ce compte est actuellement désactivé</h1>

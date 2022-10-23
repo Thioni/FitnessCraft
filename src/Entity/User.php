@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Structure $structure_account = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $new_account = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStructureAccount(?Structure $structure_account): self
     {
         $this->structure_account = $structure_account;
+
+        return $this;
+    }
+
+    public function isNewAccount(): ?bool
+    {
+        return $this->new_account;
+    }
+
+    public function setNewAccount(?bool $new_account): self
+    {
+        $this->new_account = $new_account;
 
         return $this;
     }
