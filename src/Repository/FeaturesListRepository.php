@@ -39,28 +39,14 @@ class FeaturesListRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return FeaturesList[] Returns an array of FeaturesList objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?FeaturesList
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findBySearch($search): array
+    {
+        return $this->createQueryBuilder('fl')
+            ->andWhere('fl.structure_id LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('fl.structure_id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 }

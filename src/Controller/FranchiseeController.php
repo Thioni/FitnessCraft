@@ -6,6 +6,7 @@ use App\Entity\FeaturesList;
 use App\Entity\Franchisee;
 use App\Entity\Structure;
 use App\Form\FranchiseeType;
+use App\Repository\FranchiseeRepository;
 use App\Repository\StructureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,9 +36,12 @@ class FranchiseeController extends AbstractController {
   }
 
   #[Route("admin/franchisee-list", name: "franchisee_list")]
-  public function getAll(ManagerRegistry $doctrine): Response {
-    $repo = $doctrine->getRepository(Franchisee::class);
+  public function getAll(Request $request, FranchiseeRepository $repo): Response {
+    $search = $request->request->get("search");
     $franchisees = $repo->findAll();
+    if ($search) {
+      $franchisees = $repo->findBySearch($search);
+    }
     
     return $this->renderForm("franchisee/list.html.twig", [
       "franchisees" => $franchisees,
@@ -95,7 +99,7 @@ class FranchiseeController extends AbstractController {
     ]);
   }
 
-  #[Route("/delete-franchisee/{id}", name: "delete_franchisee")]
+  #[Route("admin/delete-franchisee/{id}", name: "delete_franchisee")]
   public function delete(ManagerRegistry $doctrine, Franchisee $franchisee): Response {
 
     $em = $doctrine->getManager();
@@ -103,5 +107,5 @@ class FranchiseeController extends AbstractController {
     $em->flush();
     return $this->redirectToRoute("franchisee_list");
   }
-
+  
 }

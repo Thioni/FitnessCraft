@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Liste des options{% endblock %}
+
 {% block body %}
 
   <div class="text-danger text-center">
@@ -15,7 +17,7 @@
         {% for featuresList in featuresLists %}
             <div class="card m-1 bg-info" style="width: 25rem;">
               <div class="card-body">
-                <h5 class="col-12 text-center card-text fw-bold mb-3">{{ featuresList.getstructure }}</h5>
+                <h2 class="col-12 text-center card-text fw-bold mb-3">{{ featuresList.getstructure }}</h2>
                 
                   <div class="row">
                     <div class="col-8 card-text fw-bold">Ajout de nouveaux membres:</div>

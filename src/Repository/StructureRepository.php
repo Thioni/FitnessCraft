@@ -39,6 +39,23 @@ class StructureRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBySearch($search): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.name LIKE :search 
+            OR s.manager_firstname LIKE :search 
+            OR s.manager_lastname LIKE :search
+            OR s.manager_email LIKE :search
+            OR s.adress LIKE :search
+            OR s.city LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('s.name', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // Le DQL ayant apparement un problème avec update utilisé avec un join, j'utilise ici du SQL
      public function changeStatus() 
      {
         $this->getEntityManager()

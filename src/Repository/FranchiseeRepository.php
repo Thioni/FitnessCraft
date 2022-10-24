@@ -39,4 +39,17 @@ class FranchiseeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBySearch($search): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.name LIKE :search 
+            OR f.director_firstname LIKE :search 
+            OR f.director_lastname LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->orderBy('f.name', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

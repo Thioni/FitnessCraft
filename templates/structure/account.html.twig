@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Mon espace{% endblock %}
+
 {% block body %}
 
   <div class="container-fluid">
@@ -14,7 +16,7 @@
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 50rem;">
               <div class="card-body">
-                <h3 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.name }}</h3>
+                <h2 class="card-title text-center fw-bold mb-4">{{ app.user.structureaccount.name }}</h2>
                   <div class="row">
                     <div class="col-4 fw-bold">FRANCHISÉ:</div>
                     <div class="col-8">{{ app.user.structureaccount.managedby }}</div>
@@ -39,7 +41,7 @@
       <section class="d-flex flex-wrap justify-content-center my-5">
           <div class="card m-1 bg-info" style="width: 35rem;">   
             <div class="card-body">
-              <h5 class="text-center fw-bold mb-4">OPTIONS SOUSCRITES</h5>
+              <h3 class="text-center fw-bold mb-4">OPTIONS SOUSCRITES</h3>
                 <div class="row">
                   <div class="col-8 fw-bold">Ajout de nouveaux membres:</div>
                   <div class="col-4">{{ featuresLists.addnewmembers ? "Oui" : "Non" }}</div>

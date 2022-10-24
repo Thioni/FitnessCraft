@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Liste des franchisés{% endblock %}
+
 {% block body %}
 
   <div class="text-danger text-center">
@@ -17,11 +19,15 @@
 
       <section class="row justify-content-center">
         <div class="col-2 form-check form-switch">
-          <input id="toggleActiveFranchisees" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <input id="toggleEdition" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+          <label class="form-check-label" for="flexSwitchCheckChecked">Mode Édition</label>
+        </div>
+        <div class="col-2 form-check form-switch">
+          <input id="toggleActiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Franchises Actives</label>
         </div>
         <div class="col-2 form-check form-switch">
-          <input id="toggleInactiveFranchisees" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <input id="toggleInactiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Franchises Inactives</label>
         </div>
       </secton>
@@ -30,7 +36,7 @@
         {% for franchisee in franchisees %}
             <div {% if franchisee.active == 1 %} class="active card m-1 bg-success" {% endif %} class="inactive card m-1 bg-danger" style="width: 25rem;">
               <div class="card-body">
-                <h5 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h5>
+                <h2 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h2>
                   <div class="row">
                     <div class="col-4 card-text fw-bold">DIRECTEUR:</div>
                     <div class="col-8 card-text">{{ franchisee.directorfirstname|capitalize }} {{ franchisee.directorlastname|capitalize }}</div>
@@ -40,10 +46,10 @@
                     <div class="col-8 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
-              <div class="row justify-content-around">
+              <div class="row justify-content-around append d-none">
               <a href="{{ path('update_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
               <a href="{{ path('franchisee_details', {'id': franchisee.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>
-              <a href="{{ path('delete_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
+              <a href="{{ path('delete_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-dark mb-2">Supprimer</a>
               </div>
             </div>
         {% endfor %}
@@ -53,6 +59,6 @@
 
   {% endif %}
 
-  <script src="{{ asset('javascript/filtresFranchisee.js') }}"></script>
+  <script src="{{ asset('javascript/filters.js') }}"></script>
 
 {% endblock %}

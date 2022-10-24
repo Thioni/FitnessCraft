@@ -6,6 +6,7 @@ use App\Entity\FeaturesList;
 use App\Entity\Franchisee;
 use App\Entity\Structure;
 use App\Form\StructureType;
+use App\Repository\StructureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +35,12 @@ class StructureController extends AbstractController {
   }
 
   #[Route("admin/structure-list", name: "structure_list")]
-  public function getAll(ManagerRegistry $doctrine): Response {
-    $repo = $doctrine->getRepository(structure::class);
+  public function getAll(Request $request, StructureRepository $repo): Response {
+    $search = $request->request->get("search");
     $structures = $repo->findAll();
+    if ($search) {
+      $structures = $repo->findBySearch($search);
+    }
 
     return $this->renderForm("structure/list.html.twig", [
         "structures" => $structures

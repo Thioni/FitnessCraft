@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FeaturesList;
 use App\Form\FeaturesListType;
+use App\Repository\FeaturesListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class FeaturesListController extends AbstractController {
 
-  #[Route("/create-featuresList", name: "create_featuresList")]
+  #[Route("admin/create-featuresList", name: "create_featuresList")]
   public function create(Request $request, ManagerRegistry $doctrine): Response {
     $featuresList = new featuresList();
 
@@ -32,17 +33,20 @@ class FeaturesListController extends AbstractController {
     ]);
   }
 
-  #[Route("/featuresList-list", name: "featuresList_list")]
-  public function getAll(ManagerRegistry $doctrine): Response {
-    $repo = $doctrine->getRepository(featuresList::class);
+  #[Route("admin/featuresList-list", name: "featuresList_list")]
+  public function getAll(Request $request, FeaturesListRepository $repo): Response {
+    $search = $request->request->get("search");
     $featuresLists = $repo->findAll();
+    if ($search) {
+      $featuresLists = $repo->findBySearch($search);
+    }
 
     return $this->renderForm("featuresList/list.html.twig", [
         "featuresLists" => $featuresLists
     ]);
   }
 
-  #[Route("/featuresList-details/{id}", name: "featuresList_details")]
+  #[Route("admin/featuresList-details/{id}", name: "featuresList_details")]
   public function getDetails(ManagerRegistry $doctrine, int $id): Response {
 
     $repo = $doctrine->getRepository(featuresList::class);
@@ -53,7 +57,7 @@ class FeaturesListController extends AbstractController {
     ]);
   }
 
-  #[Route("/update-featuresList/{id}", name: "update_featuresList")]
+  #[Route("admin/update-featuresList/{id}", name: "update_featuresList")]
   public function update(Request $request, ManagerRegistry $doctrine, featuresList $featuresList): Response {
 
     $featuresListForm = $this->createForm(featuresListType::class, $featuresList);
@@ -73,7 +77,7 @@ class FeaturesListController extends AbstractController {
     ]);
   }
 
-  #[Route("/delete-featuresList/{id}", name: "delete_featuresList")]
+  #[Route("admin/delete-featuresList/{id}", name: "delete_featuresList")]
   public function delete(ManagerRegistry $doctrine, featuresList $featuresList): Response {
 
     $em = $doctrine->getManager();

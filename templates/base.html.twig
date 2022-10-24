@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="description" content="Application de gestion des franchisés de l'enseigne de salles de sport FitnessCraft"/>
         <title>{% block title %}FitnessCraft{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -16,6 +17,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-success">
         <div class="container-fluid">
+
       {% if is_granted('ROLE_ADMIN') %}
           <a class="navbar-brand fw-bold text-light" href="/">FitnessCraft</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,8 +60,16 @@
                   <li><a class="dropdown-item text-light" href="{{ path('create_structure_user') }}">Structure</a></li>
                 </ul>
       {% endif %}
+
               </li>
             </ul>
+            {% if app.request.get("_route") == "franchisee_list" or app.request.get("_route") == "structure_list" or app.request.get("_route") == "featuresList_list" %}
+            <form class="d-flex" method="POST">
+              <input class="form-control me-2" type="search" placeholder="Rechercher" name="search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            </form>
+            {% endif %}
+
             <div class="text-light">
               {% if app.user %}
                   <span>Bonjour, </span> <span class="fw-bold">{{ app.user.email }} </span>
@@ -68,11 +78,12 @@
               <a href="/login" class="btn btn-success">Se connecter</a>
             </div>
               {% endif %}
+              
           </div>
         </div>
       </nav>
 
-        {% block body %}{% endblock %}
+    {% block body %}{% endblock %}
         
     <script src="{{ asset('javascript/bootstrap.bundle.min.js') }}"></script>
 
