@@ -16,15 +16,15 @@
     <h1 class="text-center mb-5">Liste des Structures</h1>
 
       <section class="row justify-content-center">
-        <div class="col-2 form-check form-switch">
+        <div class="col-4 col-md-2 form-check form-switch">
           <input id="toggleEdition" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
           <label class="form-check-label" for="flexSwitchCheckChecked">Mode Édition</label>
         </div>
-        <div class="col-2 form-check form-switch">
+        <div class="col-4 col-md-2 form-check form-switch">
           <input id="toggleActiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Structures Actives</label>
         </div>
-        <div class="col-2 form-check form-switch">
+        <div class="col-4 col-md-2 form-check form-switch">
           <input id="toggleInactiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Structures Inactives</label>
         </div>
@@ -51,15 +51,15 @@
 
               <div class="row justify-content-around append d-none">
                 <a href="{{ path('update_structure', {'id': structure.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
-                <a href="{{ path('structure_details', {'id': structure.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>
-                <a href="{{ path('delete_structure', {'id': structure.id}) }}" class="col-3 btn btn-dark mb-2">Supprimer</a>
+                <a href="{{ path('structure_details', {'id': structure.id}) }}" class="col-3 btn btn-primary mb-2">Détails</a>   
               </div>
             </div>
         {% endfor %}
       </section>
 
+
       <div class="row justify-content-center">
-        <a href="{{ path('franchisee_list') }}" class="col-2 col-md-1 btn btn-success mb-5">Retour aux franchisés</a>
+        <a href="{{ path('franchisee_list') }}" class="col-6 col-md-4 col-lg-2 btn btn-success mb-5">Retour aux franchisés</a>
       </div>
 
   </div>

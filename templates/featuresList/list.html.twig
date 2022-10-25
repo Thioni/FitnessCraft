@@ -45,7 +45,7 @@
                   </div>
 
                   <div class="row justify-content-around mt-2">
-                    <a href="/update-featuresList/{{ featuresList.id }}" class="col-3 btn btn-warning">Modifier</a>
+                    <a href="{{ path('update_featuresList', {'id': featuresList.id}) }}) }}" class="col-3 btn btn-warning">Modifier</a>
                   </div>
               </div>
             </div>
@@ -53,7 +53,7 @@
       </section>
 
       <div class="row justify-content-center">
-        <a href="{{ path('structure_list') }}" class="col-2 col-md-1 btn btn-success mb-5">Retour aux structures</a>
+        <a href="{{ path('structure_list') }}" class="col-6 col-md-4 col-lg-2 btn btn-success mb-5">Retour aux structures</a>
       </div>
 
   </div>

@@ -23,7 +23,8 @@
               </div>
               <div class="row justify-content-around mt-2">
                 <a href="{{ path('update_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
-                <a href="{{ path('delete_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
+                <button class="col-3 btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+                {% include "modal.html.twig" %}
               </div>    
       </section>
 

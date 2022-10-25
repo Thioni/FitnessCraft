@@ -1,0 +1,8 @@
+#toTheTop {
+  position: fixed;
+  background-color: #dc3545;
+  right: 5px;
+  bottom: 10px;
+  border-radius: 150px;
+  z-index: 1
+}

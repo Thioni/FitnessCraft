@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="Application de gestion des franchisés de l'enseigne de salles de sport FitnessCraft"/>
@@ -8,14 +8,21 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src="{{ asset('javascript/app.js') }}" defer></script>
+            <script src="{{ asset('javascript/bootstrap.bundle.min.js') }}" defer></script>
         {% endblock %}
     </head>
 
 
     <body>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-success">
+      <nav class="navbar navbar-expand-lg navbar-light bg-success" id="navbar">
         <div class="container-fluid">
 
       {% if is_granted('ROLE_ADMIN') %}
@@ -83,9 +90,13 @@
         </div>
       </nav>
 
-    {% block body %}{% endblock %}
-        
-    <script src="{{ asset('javascript/bootstrap.bundle.min.js') }}"></script>
+      {# Bouton de retour en haut de page #}
+      <div class="d-lg-none" id="toTheTop">
+       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+       </svg>
+      </div>
 
+    {% block body %}{% endblock %}
     </body>
 </html>

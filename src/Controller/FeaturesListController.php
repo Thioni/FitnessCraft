@@ -46,17 +46,6 @@ class FeaturesListController extends AbstractController {
     ]);
   }
 
-  #[Route("admin/featuresList-details/{id}", name: "featuresList_details")]
-  public function getDetails(ManagerRegistry $doctrine, int $id): Response {
-
-    $repo = $doctrine->getRepository(featuresList::class);
-    $featuresList = $repo->find($id);
-
-    return $this->renderForm("featuresList/details.html.twig", [
-        "featuresList" => $featuresList
-    ]);
-  }
-
   #[Route("admin/update-featuresList/{id}", name: "update_featuresList")]
   public function update(Request $request, ManagerRegistry $doctrine, featuresList $featuresList): Response {
 
@@ -75,15 +64,6 @@ class FeaturesListController extends AbstractController {
         "featuresListForm" => $featuresListForm,
         "featuresList" => $featuresList
     ]);
-  }
-
-  #[Route("admin/delete-featuresList/{id}", name: "delete_featuresList")]
-  public function delete(ManagerRegistry $doctrine, featuresList $featuresList): Response {
-
-    $em = $doctrine->getManager();
-    $em->remove($featuresList);
-    $em->flush();
-    return $this->redirectToRoute("featuresList_list");
   }
 
 }

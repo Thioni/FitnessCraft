@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: StructureRepository::class)]
+#[UniqueEntity('manager_email', 'Cette adresse mail est déja utilisée.')]
 class Structure
 {
     #[ORM\Id]
