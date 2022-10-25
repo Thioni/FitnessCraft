@@ -63,9 +63,10 @@ class StructureRepository extends ServiceEntityRepository
         ->executeStatement(
           "UPDATE structure
            JOIN franchisee
+           ON structure.managed_by_id = franchisee.id
            SET structure.active = 0
-           WHERE managed_by_id = franchisee.id
-           AND franchisee.active = 1"
+           WHERE franchisee.active = 0",
+
         );
      }
 

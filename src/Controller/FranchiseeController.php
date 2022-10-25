@@ -87,8 +87,8 @@ class FranchiseeController extends AbstractController {
    
     if ($franchiseeForm->isSubmitted() && $franchiseeForm->isValid()) {
       
-      $er->changeStatus();
       $doctrine->getManager()->flush();
+      $er->changeStatus();
       $this->addFlash('error', 'Franchisé modifié');
       return $this->redirectToRoute("franchisee_list");
     }
