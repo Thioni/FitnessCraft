@@ -37,7 +37,7 @@ class UserController extends AbstractController {
       $email = (new Email())
       ->from('fitnesscraftstaff@gmail.com')
       ->to($user->getEmail())
-      ->subject('Changement de mot de passe')
+      ->subject('Mot de passe temporaire')
       ->text('Bienvenue chez FitnessCraft! Votre mot de passe temporaire est: ' .$user->getPassword().
       ' il vous sera demandé de le changer à votre première connexion.');
       
@@ -53,7 +53,12 @@ class UserController extends AbstractController {
       
       $em->persist($user);
       $em->flush();
-      return $this->redirectToRoute("franchisee_list");
+      if ($request->get('_route') == "create_franchisee_user") {
+          return $this->redirectToRoute("franchisee_list");
+      } else if (($request->get('_route') == "create_structure_user")) {
+            return $this->redirectToRoute("structure_list");
+      }
+
     }
 
     return $this->renderForm("user/account.html.twig", [

@@ -21,7 +21,7 @@ class UserType extends AbstractType {
           "placeholder" => 'Séléctionnez un franchisé',
           "multiple" => false,
           "expanded" => false,
-          "required" => false,
+          "required" => true,
           "data" => null
           ])
           ->add("structure_account", EntityType::class, [
@@ -30,7 +30,7 @@ class UserType extends AbstractType {
             "placeholder" => 'Séléctionnez une structure',
             "multiple" => false,
             "expanded" => false,
-            "required" => false,
+            "required" => true,
             "data" => null
           ]);
   }

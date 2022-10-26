@@ -32,7 +32,7 @@
             {{ form_row(userForm.franchisee_account) }}
           </div>
         </section>
-        {% else %}
+        {% elseif app.request.get("_route") == "create_structure_user" %}
           <div class="col-8 col-sm-4 col-xxl-2 text-center rounded"> 
             {{ form_row(userForm.structure_account) }}
           </div>
