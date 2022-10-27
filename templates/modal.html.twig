@@ -4,13 +4,15 @@
    <div class="modal-dialog modal-dialog-centered">
      <div class="modal-content">
        <div class="modal-body">
-         Vous êtes sur le point de supprimer cette franchise.
+         Vous êtes sur le point de supprimer cet élément.
          <div class="row justify-content-around">
            <button type="button" class="col-3 btn btn-primary" data-bs-dismiss="modal">Annuler</button>
            {% if app.request.get("_route") == "franchisee_details" %}
            <a href="{{ path('delete_franchisee', {'id': franchisee.id}) }}" class="col-3 btn btn-danger">Confirmer</a>
            {% elseif app.request.get("_route") == "structure_details" %}
            <a href="{{ path('delete_structure', {'id': structure.id}) }}" class="col-3 btn btn-danger">Confirmer</a>
+           {% elseif app.request.get("_route") == "user_list" %}
+           <a href="{{ path('delete_user', {'id': user.id}) }}" class="col-3 btn btn-danger mb-2">Supprimer</a>
            {% endif %}
          </div>
        </div>

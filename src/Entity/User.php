@@ -11,6 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity('email', 'Cette adresse mail est déja utilisée.')]
+#[UniqueEntity('franchisee_account', 'Ce franchisé dispose déja d\'un compte')]
+#[UniqueEntity('structure_account', 'Cette structure dispose déja d\'un compte')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

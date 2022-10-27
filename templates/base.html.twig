@@ -60,11 +60,12 @@
                 </ul>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Création de comptes
+                  Comptes
                 </a>
                 <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item text-light" href="{{ path('create_franchisee_user') }}">Franchisé</a></li>
-                  <li><a class="dropdown-item text-light" href="{{ path('create_structure_user') }}">Structure</a></li>
+                  <li><a class="dropdown-item text-light" href="{{ path('user_list') }}">Liste des comptes</a></li>
+                  <li><a class="dropdown-item text-light" href="{{ path('create_franchisee_user') }}">Créer un franchisé</a></li>
+                  <li><a class="dropdown-item text-light" href="{{ path('create_structure_user') }}">Créer une structure</a></li>
                 </ul>
       {% endif %}
 
@@ -79,7 +80,7 @@
 
             <div class="text-light">
               {% if app.user %}
-                  <span>Bonjour, </span> <span class="fw-bold">{{ app.user.email }} </span>
+                  <span class="fw-bold">{{ app.user.email }} </span>
                   <a href="{{ path('app_logout') }}" class="btn btn-danger ms-md-3">Se déconnecter</a>
               {% else %}
               <a href="/login" class="btn btn-success">Se connecter</a>
@@ -100,7 +101,7 @@
     {% block body %}{% endblock %}
 
     <footer class="text-center bg-success">
-      <p>FitnessCraft © Tous droits réservés - 2022<p>
+      <div>FitnessCraft © Tous droits réservés - 2022</div>
     </footer>
 
     </body>

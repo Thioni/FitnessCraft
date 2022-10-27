@@ -65,6 +65,11 @@
                 </div>
                 {% endif %}
                 {% endfor %}
+                {% if structure.featuresList == null %} 
+                <h5 class="text-center">Options activées:</h5>
+                  <p>Cette structure ne dispose pas encore d'une liste d'options.</p>
+                  <p>Rendez-vous dans l'onglet "Permissions" pour en créer une.</p>
+                {% endif %}
              </div>
           </div>
       </section>

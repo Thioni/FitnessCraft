@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des comptes utilisateurs{% endblock %}
+
+{% block body %}
+
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="container-fluid">
+
+
+    <h1 class="text-center mb-5">Liste des Utilisateurs</h1>
+
+      <section class="d-flex flex-wrap justify-content-center my-5">
+        {% for user in users %}
+          {# Condition mise en place pour ne pas afficher les comptes admin ici #}
+          {% if user.franchiseeaccount or user.structureaccount != null %} 
+            <div class="card m-1 bg-success" style="width: 30rem;">
+              <div class="card-body">
+                <h2 class="card-title text-center fw-bold mb-4">{{ user.email }}</h2>
+                  <div class="row">
+                    {% if user.franchiseeaccount != null %} 
+                    <div class="col-4 card-text fw-bold">FRANCHISÉ:</div>
+                    <div class="col-8 card-text">{{ user.franchiseeaccount }}</div>
+                    {% endif %}
+                    {% if user.structureaccount != null %} 
+                    <div class="col-4 card-text fw-bold">STRUCTURE:</div>
+                    <div class="col-8 card-text">{{ user.structureaccount }}</div>
+                    {% endif %}
+                  </div>
+              </div>
+              <div class="row justify-content-around">
+              <a href="{{ path('update_user', {'id': user.id}) }}" class="col-3 btn btn-warning mb-2">Modifier</a>
+              <button class="col-3 btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+              {% include "modal.html.twig" %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
+
+  </div>
+
+  {% endif %}
+
+
+
+{% endblock %}

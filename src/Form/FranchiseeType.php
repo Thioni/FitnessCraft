@@ -16,7 +16,7 @@ class FranchiseeType extends AbstractType {
         ->add("director_lastname", TextType::class, ["label" => "Nom du directeur"])
         ->add("email", TextType::class, ["label" => "Email"])
         ->add('active', CheckboxType::class, [
-          'label' => "Franchisé actif",
+          'label' => "Actif",
           'required' => false,
           'label_attr' => [
             'class' => 'checkbox-switch',

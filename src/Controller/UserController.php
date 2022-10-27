@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangeEmailType;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,6 +65,54 @@ class UserController extends AbstractController {
     return $this->renderForm("user/account.html.twig", [
         "userForm" => $userForm
     ]);
+  }
+
+  #[Route("admin/user-list", name: "user_list")]
+  public function getAll(ManagerRegistry $doctrine): Response {
+    $repo = $doctrine->getRepository(User::class);
+    $users = $repo->findAll();
+    
+    return $this->renderForm("user/list.html.twig", [
+      "users" => $users
+    ]);
+  }
+
+  #[Route("admin/user-details/{id}", name: "user_details")]
+  public function getDetails(ManagerRegistry $doctrine, int $id): Response {
+    
+    $repo = $doctrine->getRepository(User::class);
+    $user = $repo->find($id);
+      
+      return $this->renderForm("user/details.html.twig", [
+        "user" => $user,
+    ]);
+  }
+
+  #[Route("admin/update-user/{id}", name: "update_user")]
+  public function update(Request $request, ManagerRegistry $doctrine, User $user): Response {
+
+    $mailForm = $this->createForm(ChangeEmailType::class, $user);
+    $mailForm->handleRequest($request);
+
+    if ($mailForm->isSubmitted() && $mailForm->isValid()) {
+      $doctrine->getManager()->flush();
+      $this->addFlash('error', 'Email modifiée');
+      return $this->redirectToRoute("user_list");
+    }
+
+    return $this->renderForm("user/mail.html.twig", [
+        "mailForm" => $mailForm,
+        "user" => $user
+    ]);
+  }
+
+  #[Route("admin/delete-user/{id}", name: "delete_user")]
+  public function delete(ManagerRegistry $doctrine, User $user): Response {
+
+    $em = $doctrine->getManager();
+    $em->remove($user);
+    $em->flush();
+    return $this->redirectToRoute("user_list");
   }
 
 }

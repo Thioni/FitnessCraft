@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des comptes utilisateurs{% endblock %}
+
+{% block body %}
+
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="container-fluid">
+
+
+    <h1 class="text-center mb-5">Compte utilisateur</h1>
+      {# Condition mise en place pour interdire le fait de se rendre sur la page d'un compte de type "admin" en modifiant l'url #}
+      {% if user.franchiseeaccount or user.structureaccount != null %} 
+      <section class="d-flex flex-wrap justify-content-center my-5">
+            <div class="card m-1 bg-success" style="width: 30rem;">
+              <div class="card-body">
+                <h2 class="card-title text-center fw-bold mb-4">{{ user.email }}</h2>
+                  <div class="row">
+                    {% if user.franchiseeaccount != null %} 
+                    <div class="col-4 card-text fw-bold">FRANCHISÉ:</div>
+                    <div class="col-8 card-text">{{ user.franchiseeaccount }}</div>
+                    {% endif %}
+                    {% if user.structureaccount != null %} 
+                    <div class="col-4 card-text fw-bold">STRUCTURE:</div>
+                    <div class="col-8 card-text">{{ user.structureaccount }}</div>
+                    {% endif %}
+                  </div>
+              </div>
+              <div class="row justify-content-around">
+              <a href="{{ path('update_user') }}" class="col-4 btn btn-warning mb-2">Modifier l'email</a>
+              <button class="col-3 btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+              {# <a href="{{ path('delete_user') }}" class="col-4 btn btn-danger mb-2">Supprimer</a> #}
+              </div>
+            </div>
+      </section>
+      {% endif %}
+
+  </div>
+
+  {% endif %}
+
+
+
+{% endblock %}

@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<div class="container-fluid">
+
       {% if app.request.get("_route") == "create_structure" %}
         <section class="row m-0 justify-content-center">
           <div class="col-sm-3 col-lg-3 col-xl-3 text-center">
@@ -51,28 +53,26 @@
         </section>
 
         <section class="row m-0 justify-content-center">
-          <div class="col col-sm-6 col-lg-4 col-xxl-1 text-center rounded"> 
+          <div class="col-4 col-md-2 col-xxl-1 text-center rounded"> 
             {{ form_row(structureForm.active) }}
           </div>
         </section>
 
-          <section class="row m-0 justify-content-center">
-            <div class="col-3 col-sm-2 col-xl-1 text-center align-self-end"> 
-              <a href="{{ path('structure_list') }}" class="btn btn-success">Annuler</a>
-            </div>
-        {% if app.request.get("_route") == "create_structure" %}
-            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
-              <input type="submit" value="Créer" class="btn btn-warning mt-3">
-            </div>
-          </section>
-        {% else %}
-            <div class="col-sm-3 col-lg-3 col-xl-2 text-center"> 
-              <input type="submit" value="Modifier" class="btn btn-warning mt-3">
-            </div>
-          </section>
-        {% endif %}
+        <section class="row mb-5 justify-content-center">
+          <div class="col-3 col-sm-2 text-center align-self-end"> 
+            <a href="{{ path('structure_list') }}" class="btn btn-success">Annuler</a>
+          </div>
+          <div class="col-3 col-sm-2 text-center"> 
+            {% if app.request.get("_route") == "create_structure" %}
+            <input type="submit" value="Créer" class="btn btn-warning mt-3">
+            {% else %}
+            <input type="submit" value="Modifier" class="btn btn-warning mt-3">
+            {% endif %}
+          </div>
+        </section>
 
       {{ form_end(structureForm) }}
 
+</div>
 
 {% endblock %}
