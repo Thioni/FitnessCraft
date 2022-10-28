@@ -12,8 +12,8 @@
 
   <div class="container-fluid">
 
-    <h1 class="text-center">Options souscrites</h1>
-      <section class="d-flex flex-wrap justify-content-center my-5">
+    <h1 class="text-center"id="switches">Options souscrites</h1>
+      <section class="d-flex flex-wrap justify-content-center my-5" id="noResult">
         {% for featuresList in featuresLists %}
             <div class="card m-1 bg-info" style="width: 25rem;">
               <div class="card-body">
@@ -57,4 +57,7 @@
       </div>
 
   </div>
+
+  <script src="{{ asset('javascript/search.js') }}"></script>
+
 {% endblock %}

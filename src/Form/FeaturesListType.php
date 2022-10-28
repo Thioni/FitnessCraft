@@ -16,7 +16,6 @@ class FeaturesListType extends AbstractType {
         ->add("structure", EntityType::class, [
         'label' => "Structure",
         'class' => Structure::class,
-        'disabled' => true,
         'multiple' => false,
         'expanded' => false,
         'query_builder' => function (StructureRepository $er) {

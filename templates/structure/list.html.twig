@@ -15,7 +15,7 @@
 
     <h1 class="text-center mb-5">Liste des Structures</h1>
 
-      <section class="row justify-content-center">
+      <section class="row justify-content-center" id="noResult">
         <div class="col-4 col-md-2 form-check form-switch">
           <input id="toggleEdition" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
           <label class="form-check-label" for="flexSwitchCheckChecked">Mode Édition</label>
@@ -67,5 +67,6 @@
   </div>
 
   <script src="{{ asset('javascript/filters.js') }}"></script>
+  <script src="{{ asset('javascript/search.js') }}"></script>
 
 {% endblock %}

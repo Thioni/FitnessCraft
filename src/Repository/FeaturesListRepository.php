@@ -42,9 +42,10 @@ class FeaturesListRepository extends ServiceEntityRepository
     public function findBySearch($search): array
     {
         return $this->createQueryBuilder('fl')
-            ->andWhere('fl.structure_id LIKE :search')
+            ->join('fl.structure', 's')
+            ->andWhere('s.name LIKE :search')
             ->setParameter('search', '%' . $search . '%')
-            ->orderBy('fl.structure_id', 'ASC')
+            ->orderBy('s.name', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult();

@@ -71,13 +71,16 @@
 
               </li>
             </ul>
+
+            {# Barre de recherche #}
             {% if app.request.get("_route") == "franchisee_list" or app.request.get("_route") == "structure_list" or app.request.get("_route") == "featuresList_list" %}
-            <form class="d-flex" method="POST">
+            <form class="d-flex mb-2 mb-lg-0" method="POST" id="submitSearch">
               <input class="form-control me-2" type="search" placeholder="Rechercher" name="search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Rechercher</button>
+              <button class="btn btn-outline-light me-3" type="submit">Rechercher</button>
             </form>
             {% endif %}
 
+            {# Bouton de deconnexion #}
             <div class="text-light">
               {% if app.user %}
                   <span class="fw-bold">{{ app.user.email }} </span>
