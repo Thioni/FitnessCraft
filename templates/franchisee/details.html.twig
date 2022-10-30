@@ -11,14 +11,14 @@
       <section class="d-flex flex-wrap justify-content-center my-5">
             <div class="card m-1 bg-success" style="width: 25rem;">
               <div class="card-body">
-                <h5 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h5>
+                <h2 class="card-title text-center fw-bold mb-4">{{ franchisee.name|capitalize }}</h2>
                   <div class="row">
                     <div class="col-4 card-text fw-bold">DIRECTEUR:</div>
                     <div class="col-8 card-text">{{ franchisee.directorfirstname|capitalize }} {{ franchisee.directorlastname|capitalize }}</div>
                     <div class="col-4 card-text fw-bold">EMAIL:</div>
                     <div class="col-8 card-text">{{ franchisee.email }}</div>
                     <div class="col-4 card-text fw-bold">ACTIF:</div>
-                    <div class="col-8 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
+                    <div class="col-8 card-text text-light">{{ franchisee.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
               <div class="row justify-content-around mt-2">
@@ -28,13 +28,13 @@
               </div>    
       </section>
 
-    <h2 class="text-center">Structures du franchisé</h2>
+    <h3 class="text-center">Structures du franchisé :</h3>
       <section class="d-flex flex-wrap justify-content-center my-5">
         {% for structure in structures %}
         {% if structure.managedby == franchisee.name %}
-          <div class="card m-1 bg-secondary" style="width: 25rem;">   
+          <div class="card m-1 secondary" style="width: 25rem;">   
             <div class="card-body">
-              <h3 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h3>
+              <h4 class="card-title text-center fw-bold mb-4">{{ structure.name|capitalize }}</h4>
                 <div class="row">
                   <div class="col-4 card-text fw-bold">MANAGER:</div>
                   <div class="col-8 card-text">{{ structure.managerfirstname|capitalize }} {{ structure.managerlastname|capitalize }}</div>

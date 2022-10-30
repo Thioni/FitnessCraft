@@ -10,8 +10,6 @@
   {% endfor %}
   </div>
 
-
-  {% if is_granted('ROLE_ADMIN') %}
   <div class="container-fluid">
 
 
@@ -19,15 +17,15 @@
 
       <section class="row justify-content-center" id="noResult">
         <div class="col-4 col-md-2 form-check form-switch">
-          <input id="toggleEdition" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+          <input id="toggleEdition" class="form-check-input" type="checkbox"
           <label class="form-check-label" for="flexSwitchCheckChecked">Mode Édition</label>
         </div>
         <div class="col-4 col-md-2 form-check form-switch">
-          <input id="toggleActiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <input id="toggleActiveEntities" class="form-check-input" type="checkbox" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Franchises Actives</label>
         </div>
         <div class="col-4 col-md-2 form-check form-switch">
-          <input id="toggleInactiveEntities" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+          <input id="toggleInactiveEntities" class="form-check-input" type="checkbox" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked">Franchises Inactives</label>
         </div>
       </secton>
@@ -43,7 +41,7 @@
                     <div class="col-4 card-text fw-bold">EMAIL:</div>
                     <div class="col-8 card-text">{{ franchisee.email }}</div>
                     <div class="col-4 card-text fw-bold">ACTIF:</div>
-                    <div class="col-8 card-text">{{ franchisee.active ? "Oui" : "Non" }}</div>
+                    <div class="col-8 card-text text-light">{{ franchisee.active ? "Oui" : "Non" }}</div>
                   </div>
               </div>
               <div class="row justify-content-around append d-none">
@@ -55,8 +53,6 @@
       </section>
 
   </div>
-
-  {% endif %}
 
   <script src="{{ asset('javascript/filters.js') }}"></script>
   <script src="{{ asset('javascript/search.js') }}"></script>
