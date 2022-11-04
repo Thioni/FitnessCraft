@@ -77,17 +77,6 @@ class UserController extends AbstractController {
     ]);
   }
 
-  #[Route("admin/user-details/{id}", name: "user_details")]
-  public function getDetails(ManagerRegistry $doctrine, int $id): Response {
-    
-    $repo = $doctrine->getRepository(User::class);
-    $user = $repo->find($id);
-      
-      return $this->renderForm("user/details.html.twig", [
-        "user" => $user,
-    ]);
-  }
-
   #[Route("admin/update-user/{id}", name: "update_user")]
   public function update(Request $request, ManagerRegistry $doctrine, User $user): Response {
 
